@@ -1,26 +1,39 @@
-import './App.css';
 import {useState} from "react";
 
-function App() {
-  const [ list, setList ] = useState('');
-  const [ lists, setLists ] = useState([]);
+function App() {  
+  const [ todoList, setTodoList ] = useState([]);
+  const [ list, setList ] = useState("");
+
+  const handleAdd = () => {
+
+  const thing = {
+    id: todoList.length + 1,
+    thing: list,
+    done: false
+  };
+
+  const newList = todoList;
+  newList.push(thing);
+
+  setTodoList(newList); 
+  setList("");
+   //Pour ne pas réactualiser
+};
 
   const handleChange = (e) => {
     setList(e.target.value);
   };
 
-  const addChange = (e) => {
-    setLists([...lists, list]);
-  };
-
   return (
-    <div className="App">
+    <div>
       <h1>Ma liste</h1>
-      <input type="text" className="input" onChange={handleChange}/>
-      <button onClick={addChange}>Ajouter</button>
+      <input type="text" className="input" value={list} onChange={handleChange} />
+      <button onClick={handleAdd}>+</button>
 
-      {lists.map((list, index) => (
-        <p key={index}>{lists}</p>
+      {todoList.map((todo, index) => (
+        <>
+        <p>{todo.thing}</p>
+        </>
       ))}
     </div>
   );
