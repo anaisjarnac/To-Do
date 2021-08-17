@@ -8,6 +8,7 @@ function App() {
 
   const thing = {
     id: todoList.length + 1,
+    //incrément des taches
     thing: list,
     done: false
   };
@@ -24,6 +25,13 @@ function App() {
     setList(e.target.value);
   };
 
+  const handleDelete = (id) => {
+    //filter: renvoie un tableau avec un élément en moins
+    const filteredList = todoList.filter((item) => item.id !== id);
+    setTodoList(filteredList);
+    // je rafraichie et donne le tableau filtrer
+  };
+
   return (
     <div>
       <h1>Ma liste</h1>
@@ -33,6 +41,9 @@ function App() {
       {todoList.map((todo, index) => (
         <>
         <p>{todo.thing}</p>
+        <p className="delete" onClick={() => handleDelete(todo.id)}>
+            X
+          </p>
         </>
       ))}
     </div>
