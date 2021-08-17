@@ -1,4 +1,5 @@
 import {useState} from "react";
+import "./App.css";
 
 function App() {  
   const [ todoList, setTodoList ] = useState([]);
@@ -26,24 +27,56 @@ function App() {
   };
 
   const handleDelete = (id) => {
+    //Ici, etes vous sur ?
     //filter: renvoie un tableau avec un élément en moins
-    const filteredList = todoList.filter((item) => item.id !== id);
+    const filteredList = todoList.filter((todo) => todo.id !== id);
+    //retourne tous les éléments du tableau qui ont un id différents que celui que je supprime
     setTodoList(filteredList);
     // je rafraichie et donne le tableau filtrer
   };
 
+  const handleDone = (id) => {
+
+    const index = todoList.findIndex((item) => item.id === id);
+    // je recup l'index (sa position dans le tableau),
+    todoList[index].done = !todoList[index].done;
+    // je viens changer la valeur de done que je viens de trouver
+    
+    setTodoList(todoList);
+    // je rafraichie en utilisant le seteur de todoList
+  };
+
   return (
-    <div>
-      <h1>Ma liste</h1>
+    <div className="App">
+      <h1 style={{color: 'pink', fontWeight: 600}}>MA TO-DO LIST</h1>
       <input type="text" className="input" value={list} onChange={handleChange} />
       <button onClick={handleAdd}>+</button>
 
       {todoList.map((todo, index) => (
         <>
-        <p>{todo.thing}</p>
-        <p className="delete" onClick={() => handleDelete(todo.id)}>
-            X
-          </p>
+        <div className="word" key={todo.id} >
+
+
+          {todo.done && (
+            <input
+              onChange={() => handleDone(todo.id)}
+              type="checkbox"
+              className="check"
+              checked
+            />
+          )}
+          {!todo.done && (
+            <input onChange={() => handleDone(todo.id)} 
+            type="checkbox" />
+          )}
+
+
+
+        <span className="thing">{todo.thing}</span>
+        <span className="delete" onClick={() => handleDelete(todo.id)}>
+        <img src="assets/close.jpg" className="img"/>
+          </span>
+          </div>
         </>
       ))}
     </div>
