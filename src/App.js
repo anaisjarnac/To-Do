@@ -37,7 +37,7 @@ function App() {
 
   const handleDone = (id) => {
 
-    const index = todoList.findIndex((item) => item.id === id);
+    const index = todoList.findIndex((todo) => todo.id === id);
     // je recup l'index (sa position dans le tableau),
     todoList[index].done = !todoList[index].done;
     // je viens changer la valeur de done que je viens de trouver
@@ -45,6 +45,7 @@ function App() {
     setTodoList(todoList);
     // je rafraichie en utilisant le seteur de todoList
   };
+
 
   return (
     <div className="App">
