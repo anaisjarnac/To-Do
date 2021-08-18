@@ -1,21 +1,23 @@
 import {useState} from "react";
 import "./App.css";
+import axios from 'axios';
+import ButtonDone from './common/ButtonDone';
 
 function App() {  
   const [ todoList, setTodoList ] = useState([]);
-  const [ list, setList ] = useState("");
+  const [ list, setList ] = useState ("");
 
   const handleAdd = () => {
 
-  const thing = {
+  const task = {
     id: todoList.length + 1,
     //incrément des taches
-    thing: list,
+    task: list,
     done: false
   };
 
   const newList = todoList;
-  newList.push(thing);
+  newList.push(task);
 
   setTodoList(newList); 
   setList("");
@@ -46,6 +48,9 @@ function App() {
     // je rafraichie en utilisant le seteur de todoList
   };
 
+//   const handleSubmit = async () => {
+//     await axios.post(`http://localhost:8000/todolist/`, list );
+// };
 
   return (
     <div className="App">
@@ -54,8 +59,8 @@ function App() {
       <button onClick={handleAdd}>+</button>
 
       {todoList.map((todo, index) => (
-        <>
-        <div className="word" key={todo.id} >
+        <div className="container">
+        {/* <div className="word" key={todo.id} >
 
 
           {todo.done && (
@@ -69,16 +74,15 @@ function App() {
           {!todo.done && (
             <input onChange={() => handleDone(todo.id)} 
             type="checkbox" />
-          )}
-
-
-
-        <span className="thing">{todo.thing}</span>
+            
+          )} */}
+        <span><ButtonDone /></span>
+        <span className="thing">{todo.task}</span>
         <span className="delete" onClick={() => handleDelete(todo.id)}>
         <img src="assets/close.jpg" className="img"/>
           </span>
-          </div>
-        </>
+          {/* </div> */}
+        </div>
       ))}
     </div>
   );
