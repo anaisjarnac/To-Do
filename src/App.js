@@ -2,6 +2,7 @@ import {useState} from "react";
 import "./App.css";
 import axios from 'axios';
 import ButtonDone from './common/ButtonDone';
+import EasyEdit, { Types } from "react-easy-edit";
 
 function App() {  
   const [ todoList, setTodoList ] = useState([]);
@@ -54,9 +55,9 @@ function App() {
 
   return (
     <div className="App">
-      <h1 style={{color: 'pink', fontWeight: 600}}>MA TO-DO LIST</h1>
-      <input type="text" className="input" value={list} onChange={handleChange} />
-      <button onClick={handleAdd}>+</button>
+      <h1 className="title">MA TO-DO LIST</h1>
+      <input type="text" placeholder="Ne pas oublier ..." className="input" value={list} onChange={handleChange} />
+      <button onClick={handleAdd}>Ajouter</button>
 
       {todoList.map((todo, index) => (
         <div className="container">
@@ -77,7 +78,12 @@ function App() {
             
           )} */}
         <span><ButtonDone /></span>
-        <span className="thing">{todo.task}</span>
+        {/* <span className="thing">{todo.task}</span> */}
+        <EasyEdit
+        type={Types.TEXT}
+        value={todo.task}
+        onSave={val => alert("cancelled!")}
+      />
         <span className="delete" onClick={() => handleDelete(todo.id)}>
         <img src="assets/close.jpg" className="img"/>
           </span>
