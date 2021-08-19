@@ -15,9 +15,9 @@ export default function Switches() {
       <Switch
         checked={state.checked}
         onChange={handleChange}
-        name="checked"
+        name={"done"}
         style={{ 
-          color: "#E0766F"
+          color: "#CE637E",
           }}
       />
     </div>

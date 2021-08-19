@@ -4,19 +4,29 @@ import ButtonDone from "./common/ButtonDone";
 import EasyEdit, { Types } from "react-easy-edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-// import axios from 'axios';
+import axios from 'axios';
 
 function App() {
+
+  const createTask = () => {
+    axios.post("http://localhost:3030/todolist", list);
+  };
+
   const [todoList, setTodoList] = useState([]);
   const [list, setList] = useState("");
 
-  const handleAdd = () => {
-    const task = {
-      id: todoList.length + 1,
-      //incrément des tâches
-      task: list,
-      done: false,
-    };
+  const task = {
+    id: todoList.length + 1,
+    //incrément des tâches
+    task: list,
+    done: false,
+  };
+
+  const handleAdd = (e) => {
+
+    e.preventDefault();
+    console.log(list);
+    createTask()
 
     const newList = todoList;
     newList.push(task);
@@ -28,6 +38,7 @@ function App() {
 
   const handleChange = (e) => {
     setList(e.target.value);
+    
   };
 
   const handleDelete = (id) => {
@@ -39,12 +50,7 @@ function App() {
     // je rafraichie et donne le tableau filtrer
   };
 
-  //   const handleSubmit = async () => {
-  //     await axios.post(`http://localhost:8000/todolist/`, list );
-  // };
-
-  const save = (value) => {};
-
+  const save = () => {};
   const cancel = () => {};
 
   return (
@@ -72,23 +78,24 @@ function App() {
           Ma TO-DO List
         </h1>
       </div>
-      <div className="add">
         <input
           type="text"
-          placeholder="Ajouter une tâche..."
+          placeholder="  Ne pas oublier ..."
           className="input"
           value={list}
           onChange={handleChange}
+          name="list"
         />
         <button onClick={handleAdd} className="buttonadd">
           <AddCircleIcon />
         </button>
-      </div>
+     
+     
 
       {todoList.map((todo, index) => (
         <div className="container">
           <span>
-            <ButtonDone />
+            <div className="check"><ButtonDone /></div>
           </span>
           <EasyEdit
             type={Types.TEXT}
@@ -97,10 +104,11 @@ function App() {
             onCancel={cancel}
             saveButtonLabel="OK"
             cancelButtonLabel="X"
+            className="edit"
           />
-
           <span className="delete" onClick={() => handleDelete(todo.id)}>
             <DeleteIcon />
+
           </span>
         </div>
       ))}

@@ -3,11 +3,14 @@
 }
 
 .delete {
-  margin-left: 20px;
+  margin-left: 35px;
+  color: #EFA558;
 }
 
 .delete:hover {
   cursor: pointer;
+  color: #EB8B4E;
+  font-size: 20;
 }
 
 .img {
@@ -22,6 +25,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 10px
 }
 
 .buttonadd {
@@ -36,6 +40,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 30px;
 }
 
 .input {
@@ -43,6 +48,15 @@
   width: 250px;
   font-size: 18px;
   border: 2px solid #1E2F3C;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Roboto', sans-serif;
+  color: black;
   
+}
+
+.edit {
+  color: #E0766F;
+}
+
+.check {
+  margin-right: 20px;
 }
