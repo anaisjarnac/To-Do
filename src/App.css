@@ -14,10 +14,6 @@
   width: 20px;
 }
 
-.word {
-  margin-top: 20px;
-}
-
 .thing {
   margin-left: 20px;
 }
@@ -26,8 +22,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
-.title {
-  font-family: 'Permanent Marker', cursive;
+
+.buttonadd {
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  color: #E0766F;
+  margin-left: 10px;
+}
+
+.add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  height:40px;
+  width: 250px;
+  font-size: 18px;
+  border: 2px solid #1E2F3C;
+  font-family: 'Pacifico', cursive;
+  
 }

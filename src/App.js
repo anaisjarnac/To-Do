@@ -1,29 +1,30 @@
-import {useState} from "react";
+import { useState } from "react";
 import "./App.css";
-import axios from 'axios';
-import ButtonDone from './common/ButtonDone';
+import ButtonDone from "./common/ButtonDone";
 import EasyEdit, { Types } from "react-easy-edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+// import axios from 'axios';
 
-function App() {  
-  const [ todoList, setTodoList ] = useState([]);
-  const [ list, setList ] = useState ("");
+function App() {
+  const [todoList, setTodoList] = useState([]);
+  const [list, setList] = useState("");
 
   const handleAdd = () => {
+    const task = {
+      id: todoList.length + 1,
+      //incrément des tâches
+      task: list,
+      done: false,
+    };
 
-  const task = {
-    id: todoList.length + 1,
-    //incrément des taches
-    task: list,
-    done: false
+    const newList = todoList;
+    newList.push(task);
+
+    setTodoList(newList);
+    setList("");
+    //Pour ne pas réactualiser
   };
-
-  const newList = todoList;
-  newList.push(task);
-
-  setTodoList(newList); 
-  setList("");
-   //Pour ne pas réactualiser
-};
 
   const handleChange = (e) => {
     setList(e.target.value);
@@ -38,56 +39,69 @@ function App() {
     // je rafraichie et donne le tableau filtrer
   };
 
-  const handleDone = (id) => {
+  //   const handleSubmit = async () => {
+  //     await axios.post(`http://localhost:8000/todolist/`, list );
+  // };
 
-    const index = todoList.findIndex((todo) => todo.id === id);
-    // je recup l'index (sa position dans le tableau),
-    todoList[index].done = !todoList[index].done;
-    // je viens changer la valeur de done que je viens de trouver
-    
-    setTodoList(todoList);
-    // je rafraichie en utilisant le seteur de todoList
-  };
+  const save = (value) => {};
 
-//   const handleSubmit = async () => {
-//     await axios.post(`http://localhost:8000/todolist/`, list );
-// };
+  const cancel = () => {};
 
   return (
     <div className="App">
-      <h1 className="title">MA TO-DO LIST</h1>
-      <input type="text" placeholder="Ne pas oublier ..." className="input" value={list} onChange={handleChange} />
-      <button onClick={handleAdd}>Ajouter</button>
+      <div
+        style={{
+          background: `url("./assets/fond.png")`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          height: "300px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <h1
+          style={{
+            fontFamily: "Pacifico, cursive",
+            marginTop: "50px",
+            textAlign: "center",
+            color: "#1E2F3C",
+            fontSize: "30px",
+          }}
+        >
+          Ma TO-DO List
+        </h1>
+      </div>
+      <div className="add">
+        <input
+          type="text"
+          placeholder="Ajouter une tâche..."
+          className="input"
+          value={list}
+          onChange={handleChange}
+        />
+        <button onClick={handleAdd} className="buttonadd">
+          <AddCircleIcon />
+        </button>
+      </div>
 
       {todoList.map((todo, index) => (
         <div className="container">
-        {/* <div className="word" key={todo.id} >
-
-
-          {todo.done && (
-            <input
-              onChange={() => handleDone(todo.id)}
-              type="checkbox"
-              className="check"
-              checked
-            />
-          )}
-          {!todo.done && (
-            <input onChange={() => handleDone(todo.id)} 
-            type="checkbox" />
-            
-          )} */}
-        <span><ButtonDone /></span>
-        {/* <span className="thing">{todo.task}</span> */}
-        <EasyEdit
-        type={Types.TEXT}
-        value={todo.task}
-        onSave={val => alert("cancelled!")}
-      />
-        <span className="delete" onClick={() => handleDelete(todo.id)}>
-        <img src="assets/close.jpg" className="img"/>
+          <span>
+            <ButtonDone />
           </span>
-          {/* </div> */}
+          <EasyEdit
+            type={Types.TEXT}
+            value={todo.task}
+            onSave={save}
+            onCancel={cancel}
+            saveButtonLabel="OK"
+            cancelButtonLabel="X"
+          />
+
+          <span className="delete" onClick={() => handleDelete(todo.id)}>
+            <DeleteIcon />
+          </span>
         </div>
       ))}
     </div>

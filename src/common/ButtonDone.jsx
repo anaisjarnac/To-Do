@@ -16,7 +16,9 @@ export default function Switches() {
         checked={state.checked}
         onChange={handleChange}
         name="checked"
-        inputProps={{ 'aria-label': 'secondary checkbox' }}
+        style={{ 
+          color: "#E0766F"
+          }}
       />
     </div>
   );
