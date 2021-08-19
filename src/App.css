@@ -3,19 +3,18 @@
 }
 
 .delete {
-  margin-left: 20px;
+  margin-left: 35px;
+  color: #EFA558;
 }
 
 .delete:hover {
   cursor: pointer;
+  color: #EB8B4E;
+  font-size: 20;
 }
 
 .img {
   width: 20px;
-}
-
-.word {
-  margin-top: 20px;
 }
 
 .thing {
@@ -26,8 +25,38 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+  margin-top: 10px
 }
-.title {
-  font-family: 'Permanent Marker', cursive;
+
+.buttonadd {
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  color: #E0766F;
+  margin-left: 10px;
+}
+
+.add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.input {
+  height:40px;
+  width: 250px;
+  font-size: 18px;
+  border: 2px solid #1E2F3C;
+  font-family: 'Roboto', sans-serif;
+  color: black;
+  
+}
+
+.edit {
+  color: #E0766F;
+}
+
+.check {
+  margin-right: 20px;
 }
